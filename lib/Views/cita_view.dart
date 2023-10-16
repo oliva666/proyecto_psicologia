@@ -12,7 +12,9 @@ class _CitaViewState extends State<CitaView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+      child: Text(
+        ''
+      ),
     );
   }
 }
