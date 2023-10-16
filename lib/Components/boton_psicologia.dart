@@ -28,6 +28,9 @@ class _BotonPsicologiaState extends State<BotonPsicologia> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.onTap,
+      onDoubleTap: () {
+        
+      },
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
@@ -38,7 +41,6 @@ class _BotonPsicologiaState extends State<BotonPsicologia> {
           elevation: 3,
           child: SizedBox(
             width: widget.width ?? 130,
-            height: widget.height ?? 60,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(

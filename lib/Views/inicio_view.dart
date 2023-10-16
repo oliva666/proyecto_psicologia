@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_psicologia/Components/boton_psicologia.dart';
+import 'package:proyecto_psicologia/Components/header.dart';
+import 'package:proyecto_psicologia/Views/test_vocacional_view.dart';
 
 class InicioView extends StatefulWidget {
   const InicioView({ Key? key }) : super(key: key);
@@ -25,66 +27,52 @@ class _InicioViewState extends State<InicioView> {
   Widget build(BuildContext context) {
     _getScreenSize();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            children: [
-              header(),
-              const SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  botonSalir(),
-
-                  SizedBox(
-                    child: Row(
-                      children: [
-                        botonAgendarCita(),
-                        botonConsultarCita(),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          )
+          const Header(),
+          filaBotones(),
+          const SizedBox(height: 10,),
+          body(),
         ],
       ),
     );
   }
 
-  header(){
-    return Container(
-      height: 80,
-      width: width,
-      color: const Color(0xFF1F3D6D),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+  body(){
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(
-              'assets/images/logo.png',
-              fit: BoxFit.contain,
-            ),
-            const Text(
-              'Asesoría Psicológica',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              ),
-            ),
-            Image.network(
-              'assets/images/logo2.png',
-              fit: BoxFit.contain,
-            )
+            const SizedBox(height: 20,),
+            filaImportancia(),
+            const SizedBox(height: 40,),
+            filaNota(),
+            const SizedBox(height: 80,),
           ],
         ),
       ),
+    );
+  }
+
+  filaBotones(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        botonSalir(),
+        SizedBox(
+          child: Row(
+            children: [
+              botonAgendarCita(),
+              botonConsultarCita(),
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -102,8 +90,9 @@ class _InicioViewState extends State<InicioView> {
     return BotonPsicologia(
       iconData: Icons.calendar_today_rounded,
       text: 'Agendar cita',
-      onTap: (){},
-      height: 70,
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TestVocacionalView()));
+      },
       width: 150,
     );
   }
@@ -114,8 +103,180 @@ class _InicioViewState extends State<InicioView> {
       iconData: Icons.alarm_rounded,
       text: 'Consultar cita',
       onTap: (){},
-      height: 70,
       width: 150,
     );
   }
+
+
+  filaImportancia(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 100.0),
+      child: SizedBox(
+        width: 800,
+        child: FittedBox(
+          fit: BoxFit.contain,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              importancia(),
+              SizedBox(width: 40,),
+              imagenDoctor(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  importancia(){
+    return SizedBox(
+      height: 288,
+      width: 600,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 30,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF1F3D6D),
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: const Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Text(
+                    'Ir a terapia nos ayuda a reducir el sufrimiento mental, aliviando la depresión, la ansiedad, las adicciones, los trastornos alimenticios, los problemas para dormir y mucho más, lo que a su vez mejora nuestra calidad de vida y nos permite estar más felices, sanos y auténticos.',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 50,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  'Importancia',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                  ),
+                ),
+              ),
+            )
+          ),
+        ],
+      ),
+    );
+  }
+
+  imagenDoctor(){
+    return Image.network(
+      'assets/images/doctor.png',
+      fit: BoxFit.contain,
+    );
+  }
+
+
+  filaNota(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 100.0),
+      child: SizedBox(
+        width: 800,
+        child: FittedBox(
+          fit: BoxFit.contain,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              imagenSemaforo(),
+              const SizedBox(width: 40,),
+              nota(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  nota(){
+    return SizedBox(
+      height: 358,
+      width: 800,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 30,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF1F3D6D),
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: const Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Text(
+                    'Al agendar una cita deberás responder un cuestionario, el cual será evaluado para determinar si tu consulta es urgente, medianamente urgente y no tan unrgente, en la cual se priorizará dependiendo si tienes problemas relacionados con el suicidio, problemas familiares o personales y escolares, en el caso que sea urgende podrás agendar inmediatamente a partir del siguiente día, si es medio podrás agendar a partir del tercer día, y si no es tan urgente podrás agendar después de una semana.',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 50,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  'Nota',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                  ),
+                ),
+              ),
+            )
+          ),
+        ],
+      ),
+    );
+  }
+
+  imagenSemaforo(){
+    return Image.network(
+      'assets/images/semaforo.png',
+      width: 207,
+      height: 335,
+      fit: BoxFit.contain,
+    );
+  }
+
 }

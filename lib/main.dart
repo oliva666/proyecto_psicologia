@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_psicologia/Views/inicio_view.dart';
+import 'package:proyecto_psicologia/Views/test_vocacional_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const InicioView(),
+      // home: const TestVocacionalView(),
     );
   }
 }
