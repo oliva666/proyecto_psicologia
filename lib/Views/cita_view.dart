@@ -13,7 +13,7 @@ class _CitaViewState extends State<CitaView> {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        ''
+        'prueba'
       ),
     );
   }
